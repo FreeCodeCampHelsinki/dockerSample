@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  backend:
+    build: ./myImage
+    environment: 
+      - SECRET_KEY:lalalalalala
+
+    ports:
+      - 5000:5000
+  
+  frontend:
+    image: httpd:2.4
+    volumes:
+      - ./frontend:/usr/local/apache2/htdocs/
+    # copy:
+    #   - src:dest
+    # command: echo "hahahahaha"
+      # - chmod +rwx /usr
+    ports:
+      - 80:80
+
+    depends_on: 
+      - backend
