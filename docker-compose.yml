@@ -1,16 +1,23 @@
+#By Default Docker looks for this file
+
 version: '3'
 
-services:
-  backend:
+#Docker works with tabs as python does
+services: #this is a keyword
+  backend: #this is just a name
     build: ./myImage
     environment: 
       - SECRET_KEY:lalalalalala
 
     ports:
       - 5000:5000
+      #- 80:5000
+      #- 443:5000
   
+
+
   frontend:
-    image: httpd:2.4
+    image: httpd:2.4 #we looked it up from hub.docker.com
     volumes:
       - ./frontend:/usr/local/apache2/htdocs/
     # copy:
@@ -18,7 +25,7 @@ services:
     # command: echo "hahahahaha"
       # - chmod +rwx /usr
     ports:
-      - 80:80
+      - 80:80 #to expose it outside the container
 
     depends_on: 
-      - backend
+      - backend  #it waits for backend not to fail
